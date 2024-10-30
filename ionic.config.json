@@ -1,0 +1,7 @@
+{
+  "name": "samApp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
