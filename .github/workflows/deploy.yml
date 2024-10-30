@@ -28,7 +28,7 @@ jobs:
       - name: Build the app
         run: |
           npm install -g @angular/cli  # Ensure Angular CLI is installed
-          ng build --prod
+          ng build
 
       # Deploy to Firebase Hosting
       - name: Deploy to Firebase
