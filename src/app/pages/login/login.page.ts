@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import * as CryptoJS from 'crypto-js';
+import { Firestore, collection, getDocs } from '@angular/fire/firestore';
+import { User } from 'src/app/types/interface/core.interface';
 
 @Component({
   selector: 'app-login',
@@ -9,16 +12,52 @@ import { Router } from '@angular/router';
 export class LoginPage implements OnInit {
   username = '';
   password = '';
-  constructor(private router: Router) {}
+  constructor(private firestore: Firestore, private router: Router) {}
 
   ngOnInit() {}
 
-  onLogin() {
-    // Dummy check
-    if (this.username === 'user' && this.password === 'password') {
-      this.router.navigate(['/tabs']);
-    } else {
-      alert('Invalid credentials');
+  async onLogin() {
+    try {
+      const usersCollection = collection(this.firestore, 'users');
+      const snapshot = await getDocs(usersCollection);
+      const usersList: User[] = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      })) as User[];
+      const user = usersList.find((u: any) => u.username === this.username);
+      if (user) {
+        const encryptedPassword = user.password;
+        const decryptedPassword = CryptoJS.AES.decrypt(
+          encryptedPassword,
+          'muges@123'
+        ).toString(CryptoJS.enc.Utf8);
+
+        if (this.password === decryptedPassword) {
+          const expiryTime = new Date().getTime() + 60 * 60 * 1000;
+
+          localStorage.setItem('isLoggedIn', 'true');
+          localStorage.setItem(
+            'userDetails',
+            JSON.stringify({
+              id: user.id,
+              username: user.username,
+              role: user.role,
+              email: user.email,
+              address: user.address,
+            })
+          );
+          localStorage.setItem('expiryTime', expiryTime.toString());
+
+          this.router.navigate(['/tabs']);
+        } else {
+          this.router.navigate(['/login']);
+        }
+      } else {
+        this.router.navigate(['/login']);
+      }
+    } catch (error) {
+      console.error('Error fetching users: ', error);
+      alert('An error occurred while logging in. Please try again.');
     }
   }
 }
