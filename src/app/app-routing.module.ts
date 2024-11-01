@@ -19,6 +19,10 @@ const routes: Routes = [
       import('./tabs/tabs.module').then((m) => m.TabsPageModule),
     canActivate: [AuthGuard],
   },
+  {
+    path: '**',
+    redirectTo: 'login', // Optional: Redirect any unknown path to login
+  },
 ];
 @NgModule({
   imports: [
