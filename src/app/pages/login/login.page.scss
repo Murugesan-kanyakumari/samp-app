@@ -1,0 +1,22 @@
+.titlle {
+  text-align: center;
+  margin-bottom: -25px;
+}
+
+ion-card {
+  width: 85%;
+  max-width: 400px;
+  margin: 170px auto;
+}
+
+ion-card-content {
+  padding: 28px;
+}
+
+ion-button {
+  margin-top: 30px;
+}
+
+ion-content {
+  --background: url("/assets/login.jpg") no-repeat 100% 100%;
+}
