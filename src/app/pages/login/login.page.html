@@ -14,7 +14,8 @@
           <ion-label position="floating">Password</ion-label>
           <ion-input [(ngModel)]="password" name="password" type="password" required></ion-input>
         </ion-item>
-        <ion-button color="secondary" expand="block" type="submit">Login</ion-button>
+        <ion-button id="open-loading" color="secondary" expand="block" type="submit">Login</ion-button>
+        <ion-loading class="custom-loading" trigger="open-loading" message="Loading..." [duration]="2000"></ion-loading>
       </form>
     </ion-card-content>
   </ion-card>
