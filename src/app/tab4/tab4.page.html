@@ -4,15 +4,40 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Profile</ion-title>
-    </ion-toolbar>
-  </ion-header>
-  <ion-button id="open-loading" (click)="logout()">Logout</ion-button>
-  <ion-loading class="custom-loading" trigger="open-loading" message="Loading..." [duration]="2000"></ion-loading>
+<ion-content class="profile-content">
+  <ion-card class="profile-card">
+    <ion-card-header>
+<!--       <ion-avatar class="profile-avatar">
+        <img src="assets/profile-placeholder.png" alt="Profile Picture" />
+      </ion-avatar> -->
+      <ion-card-title>{{ userData?.username }}</ion-card-title>
+      <ion-card-subtitle>{{ userData?.role }}</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-grid>
+        <ion-row class="profile-row">
+          <ion-col size="2">
+            <ion-icon name="mail-outline"></ion-icon>
+          </ion-col>
+          <ion-col>
+            <p><strong>Email:</strong> {{ userData?.email }}</p>
+          </ion-col>
+        </ion-row>
+        <ion-row class="profile-row">
+          <ion-col size="2">
+            <ion-icon name="location-outline"></ion-icon>
+          </ion-col>
+          <ion-col>
+            <p><strong>Address:</strong> {{ userData?.address }}</p>
+          </ion-col>
+        </ion-row>
+        <!-- Add more rows for other details as needed -->
+      </ion-grid>
 
-  <app-explore-container name="Profile page"></app-explore-container>
-  
+      <!-- Logout Button -->
+      <ion-button expand="full" color="danger" (click)="logout()" class="logout-button">
+        Logout
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

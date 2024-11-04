@@ -1,0 +1,34 @@
+
+
+<ion-content class="ion-padding">
+  <div class="form-container">
+    <form (submit)="registerUser()">
+      <ion-item>
+        <ion-label position="floating">Name</ion-label>
+        <ion-input type="text" [(ngModel)]="userData.username" name="username" required></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Email</ion-label>
+        <ion-input type="email" [(ngModel)]="userData.email" name="email" required></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Mobile</ion-label>
+        <ion-input type="tel" [(ngModel)]="userData.mobile" name="mobile" required></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">address</ion-label>
+        <ion-textarea type="tel" [(ngModel)]="userData.address" name="address" required></ion-textarea>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Password</ion-label>
+        <ion-input type="password" [(ngModel)]="userData.password" name="password" required></ion-input>
+      </ion-item>
+
+      <ion-button expand="block" type="submit">Register</ion-button>
+    </form>
+  </div>
+</ion-content>

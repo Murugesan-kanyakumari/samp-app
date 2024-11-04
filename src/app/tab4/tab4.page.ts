@@ -9,7 +9,14 @@ import { Router } from '@angular/router';
 export class Tab4Page implements OnInit {
   constructor(private router: Router) {}
 
-  ngOnInit() {}
+  userData: any;
+
+  ngOnInit() {
+    const userDataString = localStorage.getItem('userDetails');
+    if (userDataString) {
+      this.userData = JSON.parse(userDataString); // Parse JSON string to an object
+    }
+  }
 
   logout() {
     localStorage.removeItem('isLoggedIn'); // Clear login status
