@@ -1,34 +1,49 @@
-
-
 <ion-content class="ion-padding">
   <div class="form-container">
-    <form (submit)="registerUser()">
+    <form [formGroup]="registerForm" (ngSubmit)="registerUser()">
       <ion-item>
         <ion-label position="floating">Name</ion-label>
-        <ion-input type="text" [(ngModel)]="userData.username" name="username" required></ion-input>
+        <ion-input type="text" formControlName="username"></ion-input>
       </ion-item>
+      <ion-note *ngIf="f['username'].invalid && f['username'].touched" color="danger">
+        Name is required (min 3 characters).
+      </ion-note>
 
       <ion-item>
         <ion-label position="floating">Email</ion-label>
-        <ion-input type="email" [(ngModel)]="userData.email" name="email" required></ion-input>
+        <ion-input type="email" formControlName="email"></ion-input>
       </ion-item>
+      <ion-note *ngIf="f['email'].invalid && f['email'].touched" color="danger">
+        Enter a valid email.
+      </ion-note>
 
       <ion-item>
         <ion-label position="floating">Mobile</ion-label>
-        <ion-input type="tel" [(ngModel)]="userData.mobile" name="mobile" required></ion-input>
+        <ion-input type="tel" formControlName="mobile"></ion-input>
       </ion-item>
+      <ion-note *ngIf="f['mobile'].invalid && f['mobile'].touched" color="danger">
+        Enter a 10-digit mobile number.
+      </ion-note>
 
       <ion-item>
-        <ion-label position="floating">address</ion-label>
-        <ion-textarea type="tel" [(ngModel)]="userData.address" name="address" required></ion-textarea>
+        <ion-label position="floating">Address</ion-label>
+        <ion-textarea formControlName="address"></ion-textarea>
       </ion-item>
+      <ion-note *ngIf="f['address'].invalid && f['address'].touched" color="danger">
+        Address is required (min 10 characters).
+      </ion-note>
 
       <ion-item>
         <ion-label position="floating">Password</ion-label>
-        <ion-input type="password" [(ngModel)]="userData.password" name="password" required></ion-input>
+        <ion-input type="password" formControlName="password"></ion-input>
       </ion-item>
+      <ion-note *ngIf="f['password'].invalid && f['password'].touched" color="danger">
+        Password is required (min 6 characters).
+      </ion-note>
 
-      <ion-button expand="block" type="submit">Register</ion-button>
+      <ion-button expand="block" type="submit" [disabled]="registerForm.invalid">
+        Register
+      </ion-button>
     </form>
   </div>
 </ion-content>

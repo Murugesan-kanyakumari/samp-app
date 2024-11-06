@@ -12,9 +12,17 @@ import { User } from 'src/app/types/interface/core.interface';
 export class LoginPage implements OnInit {
   username = '';
   password = '';
+  passwordType: string = 'password';
+  passwordIcon: string = 'eye-off';
+
   constructor(private firestore: Firestore, private router: Router) {}
 
   ngOnInit() {}
+
+  togglePasswordVisibility() {
+    this.passwordType = this.passwordType === 'password' ? 'text' : 'password';
+    this.passwordIcon = this.passwordIcon === 'eye' ? 'eye-off' : 'eye';
+  }
 
   async onLogin() {
     try {

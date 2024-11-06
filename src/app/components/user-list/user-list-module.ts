@@ -4,11 +4,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { AddUserComponent } from './add-user.component';
+import { UserListComponent } from './user-list.component';
+import { EditUserComponent } from '../edit-user/edit-user.component';
 
 @NgModule({
   imports: [CommonModule, FormsModule, IonicModule, ReactiveFormsModule],
-  declarations: [AddUserComponent],
-  exports: [AddUserComponent],
+  declarations: [UserListComponent, EditUserComponent],
+  exports: [UserListComponent, EditUserComponent],
 })
-export class AddUserComponentModule {}
+export class UserListComponentModule {}
