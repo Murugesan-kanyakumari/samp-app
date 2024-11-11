@@ -1,13 +1,20 @@
 <ion-content class="ion-padding">
   <ion-searchbar [(ngModel)]="searchTerm" placeholder="Search for users..."></ion-searchbar>
   <ion-list>
+  <!-- Show "Empty users" message when there are no users -->
+  <div *ngIf="filteredUsers().length === 0" class="empty-message">
+    <ion-text color="medium">Empty users</ion-text>
+  </div>
     <ion-item *ngFor="let user of filteredUsers()">
       <ion-label>
-        <h2>{{ user.username | titlecase }}  </h2>
+        <h2>{{ user.username | titlecase }}</h2>
         <p>{{ user.mobile || user.email }}</p>
       </ion-label>
       <ion-button slot="end" color="primary" (click)="editUser(user)">
         Edit
+      </ion-button>
+      <ion-button slot="end" color="danger" (click)="deleteUser(user)">
+        Delete
       </ion-button>
     </ion-item>
   </ion-list>

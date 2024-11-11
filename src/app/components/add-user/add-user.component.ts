@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Firestore, collection, addDoc } from '@angular/fire/firestore';
 import * as CryptoJS from 'crypto-js';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-add-user',
@@ -11,7 +12,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class AddUserComponent implements OnInit {
   registerForm: FormGroup;
 
-  constructor(private firestore: Firestore, private formBuilder: FormBuilder) {}
+  constructor(private firestore: Firestore, private formBuilder: FormBuilder,
+    private alertController: AlertController) {}
 
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
@@ -44,10 +46,25 @@ export class AddUserComponent implements OnInit {
       });
 
       console.log('User registered successfully!');
+      this.deleteUser(formValues.username);
       this.registerForm.reset();
     } catch (error) {
       console.log('AddUserComponent error :: ', error);
     }
+  }
+
+  async deleteUser(userName: any) {
+    const alert = await this.alertController.create({
+      message: `${userName} created successfully!`,
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+        },
+      ],
+    });
+
+    await alert.present();
   }
 
   get f() {

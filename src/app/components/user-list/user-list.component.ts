@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LoadingController, ModalController } from '@ionic/angular';
+import { LoadingController, ModalController, AlertController } from '@ionic/angular';
 import { EditUserComponent } from '../edit-user/edit-user.component';
 import {
   Firestore,
@@ -7,6 +7,8 @@ import {
   getDocs,
   query,
   where,
+  deleteDoc,
+  doc
 } from '@angular/fire/firestore';
 
 @Component({
@@ -22,7 +24,8 @@ export class UserListComponent implements OnInit {
   constructor(
     private modalController: ModalController,
     private firestore: Firestore,
-    private loadingController: LoadingController
+    private loadingController: LoadingController,
+    private alertController: AlertController
   ) {}
 
   async ngOnInit() {
@@ -75,5 +78,32 @@ export class UserListComponent implements OnInit {
       ...doc.data(),
     }));
     return members;
+  }
+
+  async deleteUser(user: any) {
+    const alert = await this.alertController.create({
+      header: 'Delete User',
+      message: `Are you sure you want to delete ${user.username}?`,
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+        },
+        {
+          text: 'Delete',
+          handler: async () => {
+            try {
+              await deleteDoc(doc(this.firestore, 'users', user.id));
+              this.members = this.members.filter(member => member.id !== user.id);
+              console.log('User deleted successfully');
+            } catch (error) {
+              console.error('Error deleting user:', error);
+            }
+          },
+        },
+      ],
+    });
+
+    await alert.present();
   }
 }
