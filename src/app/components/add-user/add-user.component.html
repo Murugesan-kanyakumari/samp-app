@@ -18,6 +18,18 @@
       </ion-note>
 
       <ion-item>
+        <ion-label>Gender</ion-label>
+        <ion-select formControlName="gender" placeholder="Select Gender">
+          <ion-select-option value="Male">Male</ion-select-option>
+          <ion-select-option value="Female">Female</ion-select-option>
+          <ion-select-option value="Other">Other</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-note *ngIf="f['gender'].invalid && f['gender'].touched" color="danger">
+        Gender is required
+      </ion-note>
+
+      <ion-item>
         <ion-label position="floating">Mobile</ion-label>
         <ion-input type="tel" formControlName="mobile"></ion-input>
       </ion-item>

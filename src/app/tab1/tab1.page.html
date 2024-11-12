@@ -6,12 +6,19 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Welcome Dashboard</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <app-explore-container name="Welcome Dashboard !!!!"></app-explore-container>
+<ion-content class="ion-padding dashboard-container">
+  <div class="dashboard-grid">
+    <div class="dashboard-card green">
+      <h1>{{members && members.length ? members.length : 0}}</h1>
+      <p>Total Members</p>
+    </div>
+    <div class="dashboard-card green">
+      <h1>{{maleMembers ? maleMembers : 0}}</h1>
+      <p>Male Members</p>
+    </div>
+    <div class="dashboard-card green">
+      <h1>{{femaleMembers ? femaleMembers : 0}}</h1>
+      <p>Female Members</p>
+    </div>
+  </div>
 </ion-content>

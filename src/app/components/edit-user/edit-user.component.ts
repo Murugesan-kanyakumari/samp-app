@@ -25,6 +25,7 @@ export class EditUserComponent implements OnInit {
         username: [this.user.username, Validators.required],
         email: [this.user.email, [Validators.required, Validators.email]],
         mobile: [this.user.mobile, Validators.required],
+        gender: [this.user.gender || '', Validators.required],
         password: ['', Validators.minLength(6)],
         confirmPassword: [''],
       },
@@ -45,6 +46,7 @@ export class EditUserComponent implements OnInit {
         username: this.editForm.value.username,
         email: this.editForm.value.email,
         mobile: this.editForm.value.mobile,
+        gender: this.editForm.value.gender,
       };
 
       // Only include the password if it has been updated
@@ -58,7 +60,6 @@ export class EditUserComponent implements OnInit {
       try {
         const userDocRef = doc(this.firestore, 'users', this.user.id);
         await updateDoc(userDocRef, updatedUser);
-        console.log('User updated successfully:', updatedUser);
         this.dismiss();
       } catch (error) {
         console.error('Error updating user:', error);

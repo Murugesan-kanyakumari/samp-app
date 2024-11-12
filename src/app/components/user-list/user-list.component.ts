@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { LoadingController, ModalController, AlertController } from '@ionic/angular';
+import {
+  LoadingController,
+  ModalController,
+  AlertController,
+} from '@ionic/angular';
 import { EditUserComponent } from '../edit-user/edit-user.component';
 import {
   Firestore,
@@ -8,7 +12,7 @@ import {
   query,
   where,
   deleteDoc,
-  doc
+  doc,
 } from '@angular/fire/firestore';
 
 @Component({
@@ -60,7 +64,6 @@ export class UserListComponent implements OnInit {
 
     try {
       this.members = await this.getMembers();
-      console.log('this.members ', this.members);
     } catch (error) {
       console.error('Error loading members:', error);
     } finally {
@@ -94,7 +97,9 @@ export class UserListComponent implements OnInit {
           handler: async () => {
             try {
               await deleteDoc(doc(this.firestore, 'users', user.id));
-              this.members = this.members.filter(member => member.id !== user.id);
+              this.members = this.members.filter(
+                (member) => member.id !== user.id
+              );
               console.log('User deleted successfully');
             } catch (error) {
               console.error('Error deleting user:', error);

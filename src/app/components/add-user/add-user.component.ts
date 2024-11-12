@@ -12,8 +12,11 @@ import { AlertController } from '@ionic/angular';
 export class AddUserComponent implements OnInit {
   registerForm: FormGroup;
 
-  constructor(private firestore: Firestore, private formBuilder: FormBuilder,
-    private alertController: AlertController) {}
+  constructor(
+    private firestore: Firestore,
+    private formBuilder: FormBuilder,
+    private alertController: AlertController
+  ) {}
 
   ngOnInit() {
     this.registerForm = this.formBuilder.group({
@@ -21,6 +24,7 @@ export class AddUserComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       mobile: ['', [Validators.required, Validators.pattern('^[0-9]{10}$')]],
       address: ['', [Validators.required, Validators.minLength(10)]],
+      gender: ['', Validators.required],
       password: ['', [Validators.required, Validators.minLength(6)]],
     });
   }
