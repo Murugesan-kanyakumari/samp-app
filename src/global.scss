@@ -35,3 +35,15 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import "@ionic/angular/css/palettes/dark.system.css";
+
+body {
+  color-scheme: light;
+}
+
+/* Optional: Override dark mode specific styles if needed */
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+  }
+}
