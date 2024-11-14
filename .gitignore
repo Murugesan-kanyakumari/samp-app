@@ -73,6 +73,3 @@ Thumbs.db
 .firebase
 *-debug.log
 .runtimeconfig.json
-
-# Ignore local environment files
-/src/environments/environment.ts
