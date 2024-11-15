@@ -3,6 +3,7 @@ import { Firestore, collection, addDoc } from '@angular/fire/firestore';
 import * as CryptoJS from 'crypto-js';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertController } from '@ionic/angular';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-add-user',
@@ -19,6 +20,11 @@ export class AddUserComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    console.log(
+      'evironment :::::::::::::::::::::::::: ',
+      environment.production
+    );
+
     this.registerForm = this.formBuilder.group({
       username: ['', [Validators.required, Validators.minLength(3)]],
       email: ['', [Validators.required, Validators.email]],
