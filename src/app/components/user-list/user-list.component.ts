@@ -100,7 +100,6 @@ export class UserListComponent implements OnInit {
               this.members = this.members.filter(
                 (member) => member.id !== user.id
               );
-              console.log('User deleted successfully');
             } catch (error) {
               console.error('Error deleting user:', error);
             }

@@ -18,8 +18,14 @@ export class EditUserComponent implements OnInit {
     private fb: FormBuilder,
     private firestore: Firestore
   ) {}
+  userData: any;
 
   ngOnInit() {
+    const userDataString = localStorage.getItem('userDetails');
+    if (userDataString) {
+      this.userData = JSON.parse(userDataString);
+    }
+
     this.editForm = this.fb.group(
       {
         username: [this.user.username, Validators.required],
@@ -60,14 +66,14 @@ export class EditUserComponent implements OnInit {
       try {
         const userDocRef = doc(this.firestore, 'users', this.user.id);
         await updateDoc(userDocRef, updatedUser);
-        this.dismiss();
+        this.dismiss(updatedUser);
       } catch (error) {
         console.error('Error updating user:', error);
       }
     }
   }
 
-  dismiss() {
-    this.modalController.dismiss();
+  dismiss(updatedUser?: any) {
+    this.modalController.dismiss(updatedUser);
   }
 }

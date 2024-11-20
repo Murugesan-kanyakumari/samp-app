@@ -52,6 +52,7 @@ export class LoginPage implements OnInit {
               role: user.role,
               email: user.email,
               address: user.address,
+              mobile: user.mobile,
             })
           );
           localStorage.setItem('expiryTime', expiryTime.toString());

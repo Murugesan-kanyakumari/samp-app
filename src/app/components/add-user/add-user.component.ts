@@ -20,11 +20,6 @@ export class AddUserComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    console.log(
-      'evironment :::::::::::::::::::::::::: ',
-      environment.production
-    );
-
     this.registerForm = this.formBuilder.group({
       username: ['', [Validators.required, Validators.minLength(3)]],
       email: ['', [Validators.required, Validators.email]],
@@ -55,7 +50,6 @@ export class AddUserComponent implements OnInit {
         role: 'member',
       });
 
-      console.log('User registered successfully!');
       this.deleteUser(formValues.username);
       this.registerForm.reset();
     } catch (error) {

@@ -7,35 +7,43 @@
 <ion-content class="profile-content">
   <ion-card class="profile-card">
     <ion-card-header>
-<!--       <ion-avatar class="profile-avatar">
-        <img src="assets/profile-placeholder.png" alt="Profile Picture" />
-      </ion-avatar> -->
-      <ion-card-title>{{ userData?.username }}</ion-card-title>
-      <ion-card-subtitle>{{ userData?.role }}</ion-card-subtitle>
+      <ion-card-title>{{ userData?.username | titlecase}}</ion-card-title>
+      <ion-card-subtitle>{{ userData?.role | titlecase}}</ion-card-subtitle>
+      <ion-text>{{ userData?.gender | titlecase}}</ion-text>
     </ion-card-header>
     <ion-card-content>
       <ion-grid>
         <ion-row class="profile-row">
-          <ion-col size="2">
-            <ion-icon name="mail-outline"></ion-icon>
-          </ion-col>
-          <ion-col>
-            <p><strong>Email:</strong> {{ userData?.email }}</p>
-          </ion-col>
-        </ion-row>
-        <ion-row class="profile-row">
-          <ion-col size="2">
-            <ion-icon name="location-outline"></ion-icon>
+          <ion-col size="1">
+            <ion-icon name="location-outline" class="profile-icon"></ion-icon>
           </ion-col>
           <ion-col>
             <p><strong>Address:</strong> {{ userData?.address }}</p>
           </ion-col>
         </ion-row>
-        <!-- Add more rows for other details as needed -->
+        <ion-row class="profile-row">
+          <ion-col size="1">
+            <ion-icon name="call-outline" class="profile-icon"></ion-icon>
+          </ion-col>
+          <ion-col>
+            <p><strong>Mobile:</strong> {{ userData?.mobile }}</p>
+          </ion-col>
+        </ion-row>
+        <ion-row class="profile-row">
+          <ion-col size="1">
+            <ion-icon name="mail-outline" class="profile-icon"></ion-icon>
+          </ion-col>
+          <ion-col>
+            <p><strong>Email:</strong> {{ userData?.email }}</p>
+          </ion-col>
+        </ion-row>
       </ion-grid>
 
-      <!-- Logout Button -->
-      <ion-button expand="full" color="danger" (click)="logout()" class="logout-button">
+      <!-- Buttons -->
+      <ion-button expand="full" color="primary" (click)="openEditUserModal()" class="edit-button">
+        Edit Profile
+      </ion-button>
+      <ion-button expand="full" color="danger" (click)="deleteUser()" class="logout-button">
         Logout
       </ion-button>
     </ion-card-content>

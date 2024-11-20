@@ -22,7 +22,6 @@ export class Tab1Page {
 
   async ngOnInit() {
     this.members = await this.getMembers();
-    console.log('this.members ', this.members);
     this.maleMembers = this.members.filter(
       (data) => data.gender === 'Male'
     ).length;
